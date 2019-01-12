@@ -1,4 +1,4 @@
-# RideChain
+# RideMATCHain
 Semantic-enhanced blockchain technology for car pooling
 
 ## Inspiration

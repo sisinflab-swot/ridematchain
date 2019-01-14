@@ -40,9 +40,13 @@ Run the command to launch the demo testbed on Docker.
 ```
 docker-compose up
 ```
+Open grafana in your browser (default: http://localhost:3000) and login with admin user (default: user/pass = admin/admin). The following dashboards are included:
+
+1. _Semantic Dashboard_, which reports time performance of semantic tasks.
+2. _Sawtooth Performance_, which reports overall blockchain statistics. 
 
 ## Deployment
-The framework has been tested using Hyperledger Sawtooth 1.0. Any feedback about compatibility with Hyperledger Sawtooth 1.1 is welcome. 
+The RideMATCHain framework has been tested using Hyperledger Sawtooth 1.0. Any feedback about compatibility with Hyperledger Sawtooth 1.1 is welcome. 
 
 ## Authors
 

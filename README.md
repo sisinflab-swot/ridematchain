@@ -28,3 +28,25 @@ We learned that technological and social aspects cannot be really separated when
 ## What's next for RideMATCHain
 Integrating our platform with existing payment services.
 Implementing front-ends, so that users can start enjoying better and safer ridesharing.
+
+## Getting Started
+These instructions will get you a copy of the project up and running on your local machine for testing purposes.
+### Prerequisites
+
+Docker 
+
+## Running the tests
+Run the command to launch the demo testbed on Docker. 
+```
+docker-compose up
+```
+
+## Deployment
+The framework has been tested using Hyperledger Sawtooth 1.0. Any feedback about compatibility with Hyperledger Sawtooth 1.1 is welcome. 
+
+## Authors
+
+
+## License
+
+

@@ -47,10 +47,3 @@ Open grafana in your browser (default: http://localhost:3000) and login with adm
 
 ## Deployment
 The RideMATCHain framework has been tested using Hyperledger Sawtooth 1.0. Any feedback about compatibility with Hyperledger Sawtooth 1.1 is welcome. 
-
-## Authors
-
-
-## License
-
-

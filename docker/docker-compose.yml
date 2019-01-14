@@ -1,0 +1,63 @@
+services: 
+   influxdb: 
+      container_name: influxdb
+      depends_on: 
+      - validator
+      expose: 
+      - 8086
+      image: sisinflabswot/ridematchain-stats
+      ports: 
+      - "8086:8086"
+      stop_signal: SIGKILL
+   semantic-tp: 
+      command: bash -c "semantic_tp_cxx -b tcp://validator:4004"
+      container_name: semantic-tp
+      expose: 
+      - 4004
+      image: sisinflabswot/ridematchain-processor
+      stop_signal: SIGKILL
+   validator:
+    image: hyperledger/sawtooth-validator:1.0
+    container_name: validator
+    expose:
+      - 4004
+    ports:
+      - "4004:4004"
+    # start the validator with an empty genesis batch
+    entrypoint: "bash -c \"\
+        sawadm keygen && \
+        sawtooth keygen my_key && \
+        sawset genesis -k /root/.sawtooth/keys/my_key.priv && \
+        sawadm genesis config-genesis.batch && \
+        sawtooth-validator -vv \
+          --endpoint tcp://validator:8800 \
+          --bind component:tcp://eth0:4004 \
+          --bind network:tcp://eth0:8800 \
+          --opentsdb-url http://influxdb:8086 \
+          --opentsdb-db metrics \
+          --network-auth trust \
+          --endpoint tcp://validator:8800  \
+        \"" 
+   settings-tp: 
+      command: bash -c " settings-tp -C tcp://validator:4004 "
+      container_name: settings-tp-0
+      depends_on: 
+      - validator
+      expose: 
+      - 4004
+      image: hyperledger/sawtooth-settings-tp:1.0
+      stop_signal: SIGKILL
+   grafana: 
+      container_name: grafana
+      expose: 
+      - 3000
+      image: sisinflabswot/ridematchain-grafana
+      ports: 
+      - "3000:3000"
+   simulator: 
+      command: bash -c "sleep 10 && cd /semantic_tp && java -jar semanticTP-0.0.1-SNAPSHOT.jar -t store_ontology -va tcp://validator:4004 -i http://localhost:8086 -t store_ontology -n tester-store-ontology && sleep 10 && java -jar semanticTP-0.0.1-SNAPSHOT.jar   -t store_annotation -va tcp://validator:4004  -n tester-store-annotation-0-0 -r 100 -d 500,1000 && sleep 20 && java -jar semanticTP-0.0.1-SNAPSHOT.jar  -va tcp://validator:4004 -t full_discovery -c 2 -r 30 -d 1000,2000 -pd 500,1000 -ps 10 -pn 10 -n tester-discovery-0-0 -l 80.0 -o 10 -tn 1000 -tid test_n1000_ps50_t10 -ts 2018-10-15_12:56:01.005"
+      container_name: simulator
+      image: sisinflabswot/ridematchain-gateway
+      stop_signal: SIGKILL
+
+version: "2.1"

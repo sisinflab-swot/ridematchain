@@ -38,6 +38,7 @@ Docker
 ## Running the tests
 Run the command to launch the demo testbed on Docker. 
 ```
+cd docker 
 docker-compose up
 ```
 Open grafana in your browser (default: http://localhost:3000) and login with admin user (default: user/pass = admin/admin). The following dashboards are included:

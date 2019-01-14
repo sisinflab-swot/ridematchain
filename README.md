@@ -1,5 +1,5 @@
 # RideMATCHain
-Semantic-enhanced blockchain technology for car pooling
+Semantic-enhanced blockchain-based ridesharing
 
 ## Inspiration
 A dream of cleaner and faster mobility. The desire to improve ridesharing services. Our research on semantic matchmaking and automated inference in pervasive computing.
